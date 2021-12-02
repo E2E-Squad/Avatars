@@ -15,6 +15,8 @@ class PartSelector extends React.Component<SelectorProps> {
     console.log(optionState)
     console.log(optionContext)
     const partOptions = optionState.options.map((partType) => {
+      console.log("Test")
+      console.log(partType)
       const pieceProps = {
         pieceType: type,
         [typeProp]: partType
