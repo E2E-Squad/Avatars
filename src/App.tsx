@@ -1,5 +1,7 @@
 import './App.css';
-import Pieces from './Avatars';
+// import Pieces from './Avatars';
+// import AvatarRendered from './AvatarRendered';
+import Main from './Main'
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <Pieces></Pieces>
+      {/* <AvatarRendered></AvatarRendered> */}
+      {/* <Pieces></Pieces> */}
+      <Main></Main>
     </div>
   );
 }

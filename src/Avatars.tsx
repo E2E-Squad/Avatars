@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Piece, Option, OptionContext, allOptions } from 'avataaars';
+import { Avatar, AvatarStyle, Piece, Option, OptionContext, allOptions } from 'avataaars';
 
 interface SelectorProps {
   type: string
@@ -39,13 +39,17 @@ export default class Pieces extends React.Component {
 
   private onChangeCache: Array<(value: string) => void> = []
 
-  UNSAFE_componentWillMount() {
-    this.optionContext.addStateChangeListener(() => {
-      this.forceUpdate()
-    })
-    this.onChangeCache = this.optionContext.options.map((option) =>
-      this.onChange.bind(this, option)
-    )
+  // UNSAFE_componentWillMount() {
+  //   this.optionContext.addStateChangeListener(() => {
+  //     this.forceUpdate()
+  //   })
+  //   this.onChangeCache = this.optionContext.options.map((option) =>
+  //     this.onChange.bind(this, option)
+  //   )
+  // }
+  private avatarRef: Avatar | null = null
+  private onAvatarRef = (ref: Avatar) => {
+    this.avatarRef = ref
   }
 
   render () {
@@ -53,9 +57,13 @@ export default class Pieces extends React.Component {
       <li key={"key" + index}>{option.label}</li>
     ))
     console.log(allOptions)
-    this.optionContext.setValue('mouth', 'Default')
-    const mouthValue = this.optionContext.getValue('mouth')
+    //this.optionContext.setValue('mouth', 'Default')
+    this.optionContext.setData({mouthType: 'Default'})
+    //const mouthValue = this.optionContext.getValue('mouth')
+    const mouthValue = this.optionContext.getOptionState('mouthType')
+    const topValue = this.optionContext.getOptionState('topType')
     console.log(mouthValue)
+    console.log(topValue)
     return (
       <>
       <div>
@@ -68,6 +76,9 @@ export default class Pieces extends React.Component {
         <Piece avatarStyle="Circle" pieceType="clothe" pieceSize="100" clotheType="Hoodie" clotheColor="Red"/>
         <Piece avatarStyle="Circle" pieceType="graphics" pieceSize="100" graphicType="Skull" />
         <Piece avatarStyle="Circle" pieceType="skin" pieceSize="100" skinColor="Brown" />
+      </div>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+        <Avatar ref={this.onAvatarRef} avatarStyle={AvatarStyle.Circle} />
       </div>
       <div>
         <ul>
